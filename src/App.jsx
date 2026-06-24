@@ -103,7 +103,7 @@ function App() {
 
   const getInstallerCommand = () => {
     if (source === 'source') {
-      return `git clone https://github.com/abinivas-17/apex-rag.git\ncd apex-rag\nmake install-all`;
+      return `git clone https://github.com/abi6374/apexrag.git\ncd apexrag\nmake install-all`;
     }
     
     let pipExtras = [];
@@ -700,7 +700,7 @@ for u, v, data in graph.edges(data=True):
             <a 
               target="_blank" 
               rel="noopener noreferrer" 
-              href="https://github.com/abinivas-17/apex-rag" 
+              href="https://github.com/abi6374/apexrag" 
               className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-sm font-medium hover:bg-slate-850 hover:text-white transition-all hover:scale-105"
             >
               <GithubIcon className="h-4 w-4 text-slate-400" />
@@ -740,7 +740,7 @@ for u, v, data in graph.edges(data=True):
             <a 
               target="_blank" 
               rel="noopener noreferrer" 
-              href="https://github.com/abinivas-17/apex-rag" 
+              href="https://github.com/abi6374/apexrag" 
               className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-slate-900 border border-slate-800 text-sm font-medium hover:bg-slate-850 text-white"
             >
               <GithubIcon className="h-4 w-4" />
@@ -1718,7 +1718,7 @@ for u, v, data in graph.edges(data=True):
           </div>
           
           <div className="flex gap-6">
-            <a href="https://github.com/abinivas-17/apex-rag" className="hover:text-slate-350 transition-colors">GitHub Repository</a>
+            <a href="https://github.com/abi6374/apexrag" className="hover:text-slate-350 transition-colors">GitHub Repository</a>
             <a href="https://pypi.org/project/apex-rag/" className="hover:text-slate-350 transition-colors">PyPI Releases</a>
             <a href="#" onClick={(e) => { e.preventDefault(); setViewMode('docs'); setSelectedDocId('architecture'); }} className="hover:text-slate-350 transition-colors">Architecture Overview</a>
           </div>
