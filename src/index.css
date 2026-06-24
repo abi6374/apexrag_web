@@ -29,13 +29,13 @@
 }
 
 @utility dot-grid {
-  background-image: radial-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
 @utility hero-glow {
   filter: blur(150px);
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(20, 184, 166, 0.05) 70%, transparent 100%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(20, 184, 166, 0.04) 70%, transparent 100%);
 }
 
 @utility code-scrollbar {
@@ -44,10 +44,46 @@
     width: 6px;
   }
   &::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: #090d16;
   }
   &::-webkit-scrollbar-thumb {
-    background: #334155;
+    background: #1e293b;
     border-radius: 3px;
   }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
+
+@keyframes line-pulse {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.path-pulse {
+  stroke-dasharray: 4, 4;
+  animation: line-pulse 0.8s linear infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.97); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.15s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scale-up 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.prose-content h2, .prose-content h3, .prose-content h4 {
+  scroll-margin-top: 80px;
 }
