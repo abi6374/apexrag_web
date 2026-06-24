@@ -88,7 +88,8 @@ function App() {
   const [release, setRelease] = useState('stable'); // 'stable' | 'nightly'
   const [source, setSource] = useState('pip'); // 'pip' | 'conda' | 'source'
   const [environment, setEnvironment] = useState('cuda121'); // 'cpu' | 'cuda121' | 'cuda118' | 'rocm'
-  const [provider, setProvider] = useState('openai'); // 'openai' | 'anthropic' | 'groq' | 'ollama' | 'none'
+  const [provider, setProvider] = useState('openai'); // 'openai' | 'anthropic' | 'groq' | 'ollama' | 'gemini' | 'openrouter' | 'none'
+
   const [extras, setExtras] = useState({
     web: false,
     postgres: false,
@@ -108,7 +109,7 @@ function App() {
     
     let pipExtras = [];
     if (provider !== 'openai' && provider !== 'none') {
-      pipExtras.push(provider);
+      pipExtras.push(provider); // 'anthropic', 'groq', 'ollama', 'gemini', 'openrouter'
     }
     if (extras.postgres) pipExtras.push('postgres');
     if (extras.vectors) pipExtras.push('vectors');
@@ -142,6 +143,9 @@ function App() {
     if (provider === 'openai') deps.push('openai');
     if (provider === 'anthropic') deps.push('anthropic');
     if (provider === 'groq') deps.push('groq');
+    if (provider === 'gemini') deps.push('google-generativeai');
+    if (provider === 'openrouter') deps.push('httpx');
+
     if (extras.web) deps.push('fastapi', 'uvicorn', 'jinja2');
     if (extras.postgres) deps.push('asyncpg', 'psycopg2-binary');
     if (extras.vectors) deps.push('sentence-transformers', 'numpy');
@@ -467,7 +471,15 @@ result = await index.temporal_query(
     as_of=datetime(2025, 6, 1, tzinfo=timezone.utc)
 )
 print(result["result"])      # The resolved text answer
-print(result["provenance"])  # Version lineage outline`,
+print(result["provenance"])  # Version lineage metadata
+
+# Compare document state between two points in time
+comparison = await index.temporal_compare(
+    question="Check pricing changes",
+    doc_id="product-policy-v2",
+    date_a=datetime(2025, 1, 1, tzinfo=timezone.utc),
+    date_b=datetime(2025, 6, 1, tzinfo=timezone.utc)
+)`,
     'rbac': `from apex_rag import ApexIndex, TenantContext
 
 tenant_ctx = TenantContext(
@@ -478,11 +490,12 @@ tenant_ctx = TenantContext(
 
 # Secure query with role-aware validation and content masking
 answer = await index.role_aware_query(
-    question="Summarize executive bonuses",
-    doc_id="staff_salaries_2025",
-    tenant_context=tenant_ctx
+    "Summarize executive bonuses",
+    "staff_salaries_2025",
+    tenant_ctx
 )
 print(answer.answer_text)`,
+
     'graph': `import networkx as nx
 from apex_rag import ApexIndex
 
@@ -1420,7 +1433,7 @@ for u, v, data in graph.edges(data=True):
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-850 pb-3">
                     <span className="text-slate-500 uppercase tracking-wider text-[10px]">LLM Provider Client</span>
                     <div className="flex flex-wrap gap-2 justify-start sm:justify-end">
-                      {['openai', 'anthropic', 'groq', 'ollama', 'none'].map(p => (
+                      {['openai', 'anthropic', 'groq', 'ollama', 'gemini', 'openrouter', 'none'].map(p => (
                         <button 
                           key={p}
                           onClick={() => setProvider(p)} 
