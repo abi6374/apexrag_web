@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --color-apex-dark: #020617;
+  --color-apex-card: #0f172a;
+  --color-apex-border: #1e293b;
+  --color-apex-indigo: #6366f1;
+  --color-apex-teal: #14b8a6;
+  --color-apex-violet: #8b5cf6;
+  --font-sans: Inter, sans-serif;
+  --font-mono: JetBrains Mono, monospace;
+}
+
+@utility glow-border {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, #6366f1, #14b8a6);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.15;
+    transition: opacity 0.3s;
+  }
+  &:hover::after {
+    opacity: 0.4;
+  }
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility hero-glow {
+  filter: blur(150px);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(20, 184, 166, 0.05) 70%, transparent 100%);
+}
+
+@utility code-scrollbar {
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+  }
+}
